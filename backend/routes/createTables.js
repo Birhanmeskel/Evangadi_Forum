@@ -2,7 +2,7 @@ const dbConnection = require("../db/dbConfig");
 
 async function createDatabaseTables() {
   let usersTable = `
-        CREATE TABLE IF NOT EXISTS usertable (
+        CREATE TABLE IF NOT EXISTS userTable (
             userid INT AUTO_INCREMENT,
             username VARCHAR(255) NOT NULL,
             firstname VARCHAR(255) NOT NULL,
@@ -22,7 +22,7 @@ async function createDatabaseTables() {
             tag VARCHAR(255),
             userid INT NOT NULL,
             PRIMARY KEY (id),
-            FOREIGN KEY (userid) REFERENCES usertable(userid) ON DELETE CASCADE
+            FOREIGN KEY (userid) REFERENCES userTable(userid) ON DELETE CASCADE
         )
     `;
 
@@ -33,7 +33,7 @@ async function createDatabaseTables() {
             userid INT NOT NULL,
             questionid VARCHAR(255) NOT NULL,
             PRIMARY KEY (answerid),
-            FOREIGN KEY (userid) REFERENCES usertable(userid) ON DELETE CASCADE,
+            FOREIGN KEY (userid) REFERENCES userTable(userid) ON DELETE CASCADE,
             FOREIGN KEY (questionid) REFERENCES questions(questionid) ON DELETE CASCADE
         )
     `;
