@@ -22,7 +22,7 @@ async function createDatabaseTables() {
             tag VARCHAR(255),
             userid INT NOT NULL,
             PRIMARY KEY (id),
-            FOREIGN KEY (userid) REFERENCES users(userid) ON DELETE CASCADE
+            FOREIGN KEY (userid) REFERENCES usertable(userid) ON DELETE CASCADE
         )
     `;
 
@@ -33,7 +33,7 @@ async function createDatabaseTables() {
             userid INT NOT NULL,
             questionid VARCHAR(255) NOT NULL,
             PRIMARY KEY (answerid),
-            FOREIGN KEY (userid) REFERENCES users(userid) ON DELETE CASCADE,
+            FOREIGN KEY (userid) REFERENCES usertable(userid) ON DELETE CASCADE,
             FOREIGN KEY (questionid) REFERENCES questions(questionid) ON DELETE CASCADE
         )
     `;

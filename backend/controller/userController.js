@@ -13,6 +13,7 @@ async function register(req, res) {
       msg: "please provide all required fields!",
     });
   }
+  
 
   try {
     const [user] = await dbConnection.query(
