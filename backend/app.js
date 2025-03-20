@@ -25,12 +25,14 @@ app.use("/api/users", userRoutes);
 
 // question routes middleware file
 const questionRoute = require("./routes/questionRoute");
+const answerRoute = require("./routes/answerRoute");
 
 //  authentication middleware
 const authMiddleware = require("./middleware/authMiddleware");
 
 // question routes middleware ??
 app.use("/api/question", authMiddleware, questionRoute);
+app.use("/api/answer", authMiddleware, answerRoute);
 
 // answer routes middleware ??
 
