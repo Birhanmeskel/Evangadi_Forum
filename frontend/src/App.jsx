@@ -1,14 +1,36 @@
-import { useState } from "react";
+import { useEffect } from "react";
 import "./App.css";
+import Login from "./pages/Login/Login";
+import axios from "./utils/axiosConfig";
+import { Routes, Route, useNavigate } from "react-router-dom";
+import Home from "./pages/Home/Home";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const token = localStorage.getItem("token");
+  const navigate = useNavigate();
 
+  async function checkUser() {
+    try {
+      await axios.get("/users/check", {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      });
+    } catch (error) {
+      console.log(error.response);
+      navigate("/login");
+    }
+  }
+
+  useEffect(() => {
+    checkUser();
+  }, []);
   return (
     <>
-      <div>
-        <h1>Evangadi Forum</h1>
-      </div>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+      </Routes>
     </>
   );
 }
