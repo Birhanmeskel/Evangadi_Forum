@@ -4,7 +4,6 @@ const bcrypt = require("bcrypt");
 const { StatusCodes } = require("http-status-codes");
 const jwt = require("jsonwebtoken");
 
-
 // registration
 async function register(req, res) {
   const { username, firstname, lastname, email, password } = req.body;
@@ -13,7 +12,6 @@ async function register(req, res) {
       msg: "please provide all required fields!",
     });
   }
-  
 
   try {
     const [user] = await dbConnection.query(
@@ -53,7 +51,6 @@ async function register(req, res) {
   }
 }
 
-
 // login
 async function login(req, res) {
   const { email, password } = req.body;
@@ -91,6 +88,7 @@ async function login(req, res) {
     return res.status(StatusCodes.OK).json({
       msg: "user logged successfully",
       token,
+      username,
     });
   } catch (error) {
     console.log(error);
