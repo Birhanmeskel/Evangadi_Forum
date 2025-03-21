@@ -39,7 +39,7 @@ function Login() {
         Don't have an account?{" "}
         <a href="#" className={classes.link}>
           Create a new account
-        </a>
+        </a>mo
       </p>
       <div>
         <form onSubmit={handleSubmit}>
