@@ -4,6 +4,7 @@ import Login from "./pages/Login/Login";
 import axios from "./utils/axiosConfig";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import Home from "./pages/Home/Home";
+import About from "./components/about/About";
 
 function App() {
   const token = localStorage.getItem("token");
@@ -30,6 +31,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/about" element={<About/>} />
       </Routes>
     </>
   );
