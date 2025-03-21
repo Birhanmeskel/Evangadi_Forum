@@ -1,15 +1,16 @@
 import { useEffect, useState, createContext } from "react";
+import { Routes, Route, useNavigate } from "react-router-dom";
+import axios from "./utils/axiosConfig";
 import "./App.css";
 import Login from "./pages/Login/Login";
-import axios from "./utils/axiosConfig";
-import { Routes, Route, useNavigate } from "react-router-dom";
 import Home from "./pages/Home/Home";
 
 export const AppState = createContext();
 function App() {
   const [user, setUser] = useState({});
-  const token = localStorage.getItem("token");
   const navigate = useNavigate();
+
+  const token = localStorage.getItem("token");
 
   async function checkUser() {
     try {
@@ -28,7 +29,7 @@ function App() {
   
   useEffect(() => {
     checkUser();
-  }, []);
+  }, [navigate]);
 
 
 
