@@ -4,6 +4,7 @@ import Login from "./pages/Login/Login";
 import axios from "./utils/axiosConfig";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import Home from "./pages/Home/Home";
+import Footer from "./components/Footer/Footer.jsx";
 
 function App() {
   const token = localStorage.getItem("token");
@@ -31,6 +32,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
       </Routes>
+      <Footer/>
     </>
   );
 }
