@@ -7,8 +7,8 @@ import Offcanvas from "react-bootstrap/Offcanvas";
 import { Link, useNavigate } from "react-router-dom";
 import { AppState } from "../../App";
 import "./Header.css";
-import evangadiLogo from "../../assets/evangadiLogo.png"
-function Header({ logout }) {
+import evangadiLogo from "../../assets/evangadiLogo.png";
+function Header({ logout = () => {} }) {
   const [sticky, setSticky] = useState(false);
   const { user } = useContext(AppState);
   const navigate = useNavigate();
@@ -23,8 +23,13 @@ function Header({ logout }) {
   }, []);
 
   const onClickChange = () => {
-    logout();
-    navigate("/login"); // Redirect to login page after logout
+    if (token) {
+      logout();
+      localStorage.removeItem("token");
+      navigate("/login");
+    } else {
+      navigate("/login");
+    }
   };
 
   return (
@@ -78,7 +83,7 @@ function Header({ logout }) {
                     <div className="connect-block btn-blue">
                       <button
                         className="nav-btn header-btn btn btn-blue btn-success"
-                        onClick={() => navigate("/login")}
+                        onClick={onClickChange}
                       >
                         {token ? "Log Out" : "Sign In"}
                       </button>
