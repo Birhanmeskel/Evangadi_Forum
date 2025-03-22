@@ -1,13 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
-import Container from "react-bootstrap/Container";
-import "bootstrap/dist/css/bootstrap.min.css";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
-import Offcanvas from "react-bootstrap/Offcanvas";
 import { Link, useNavigate } from "react-router-dom";
 import { AppState } from "../../App";
 import "./Header.css";
 import evangadiLogo from "../../assets/evangadiLogo.png";
+
 function Header({ logout = () => {} }) {
   const [sticky, setSticky] = useState(false);
   const { user } = useContext(AppState);
@@ -33,76 +29,29 @@ function Header({ logout = () => {} }) {
   };
 
   return (
-    <header
-      className={`navbar navbar-expand-lg navbar-light bg-light header ${
-        sticky ? "sticky" : ""
-      }`}
-    >
-      <div className="addpad">
-        <Navbar
-          expand="md"
-          className={`nav kk bg-body-tertiary fixed-top shadow-sm ${
-            sticky ? "sticky" : ""
-          }`}
-        >
-          <Container className="cont">
-            {/* LOGO - Navigate to Home Page */}
-            <Navbar.Brand as={Link} to="/">
-              <img src={evangadiLogo} alt="evangadiLogo" />
-            </Navbar.Brand>
-
-            <Navbar.Toggle aria-controls="offcanvasNavbar" />
-
-            <Navbar.Offcanvas
-              id="offcanvasNavbar"
-              aria-labelledby="offcanvasNavbarLabel"
-              placement="end"
-            >
-              <Offcanvas.Header closeButton>
-                <Offcanvas.Title id="offcanvasNavbarLabel">
-                  Menu
-                </Offcanvas.Title>
-              </Offcanvas.Header>
-              <Offcanvas.Body>
-                <Nav className="justify-content-end flex-grow-1 pe-3">
-                  {/* Home Link */}
-                  <Nav.Link as={Link} to="/" className="nav-txt links">
-                    Home
-                  </Nav.Link>
-                  {/* How It Works Link */}
-                  <Nav.Link
-                    as={Link}
-                    to="/how-it-works"
-                    className="nav-txt links"
-                  >
-                    How it Works
-                  </Nav.Link>
-                  {/* //window.location.href = "/how-it-works"; */}
-                  {/* Sign In / Log Out Button */}
-                  <Nav.Link>
-                    <div className="connect-block btn-blue">
-                      <button
-                        className="nav-btn header-btn btn btn-blue btn-success"
-                        onClick={onClickChange}
-                      >
-                        {token ? "Log Out" : "Sign In"}
-                      </button>
-                    </div>
-                  </Nav.Link>
-                </Nav>
-              </Offcanvas.Body>
-            </Navbar.Offcanvas>
-          </Container>
-        </Navbar>
+    <header className={`header ${sticky ? "sticky" : ""}`}>
+      <div className="nav-container">
+        <Link to="/" className="logo">
+          <img src={evangadiLogo} alt="evangadiLogo" />
+        </Link>
+        <input type="checkbox" id="menu-toggle" className="menu-toggle" />
+        <label htmlFor="menu-toggle" className="menu-icon">
+          ☰
+        </label>
+        <nav className="nav-links">
+          <Link to="/" className="links">
+            Home
+          </Link>
+          <Link to="/how-it-works" className="links">
+            How it Works
+          </Link>
+          <button className="nav-btn btn-blue" onClick={onClickChange}>
+            {token ? "Log Out" : "Sign In"}
+          </button>
+        </nav>
       </div>
     </header>
   );
 }
 
 export default Header;
-
-// const navigate = useNavigate();
-
-// <Navbar.Brand onClick={() => navigate("/")}>
-//   <img src={Homelogo} alt="evangadiLogo" />
-// </Navbar.Brand>;
