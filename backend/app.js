@@ -36,6 +36,10 @@ const authMiddleware = require("./middleware/authMiddleware");
 // question routes middleware ??
 app.use("/api/question", authMiddleware, questionRoute);
 app.use("/api/answer", authMiddleware, answerRoute);
+app.get("/api/", authMiddleware, (req, res) => {
+  console.log("hello");
+  res.send("You Are on home page");
+});
 
 // answer routes middleware ??
 

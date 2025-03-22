@@ -31,7 +31,7 @@ async function get_answer(req, res) {
         message: "The requested question could not be found.",
       });
     }
-
+ 
     // Fetch Answers
     const [answers] = await dbConnection.query(
       `

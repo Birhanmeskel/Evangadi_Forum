@@ -5,7 +5,7 @@ import "./App.css";
 import Login from "./pages/Login/Login";
 import Home from "./pages/Home/Home";
 import Footer from "./components/Footer/Footer.jsx";
-import Header from "./components/Header/Header.jsx"
+import Header from "./components/Header/Header.jsx";
 
 export const AppState = createContext();
 function App() {
@@ -28,23 +28,19 @@ function App() {
       navigate("/login");
     }
   }
-  
+
   useEffect(() => {
     checkUser();
-  }, [navigate]);
+  }, []);
 
-
-
-  
   return (
     <AppState.Provider value={{ user, setUser }}>
-       <Header/>
+      <Header />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
       </Routes>
-      <Footer/>
-
+      <Footer />
     </AppState.Provider>
   );
 }
