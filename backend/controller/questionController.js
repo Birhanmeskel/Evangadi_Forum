@@ -10,7 +10,10 @@ async function get_questions(req, res) {
   try {
     // Execute a query to fetch all questions from the database
     const [allQuestions] = await dbConnection.execute(
-      "SELECT * FROM questions"
+      `SELECT q.*, u.username
+FROM questions q
+JOIN usertable u ON q.userid = u.userid
+WHERE q.userid = u.userid`
     );
     // Respond with a JSON payload containing all questions and metadata
     if (allQuestions.length < 1) {

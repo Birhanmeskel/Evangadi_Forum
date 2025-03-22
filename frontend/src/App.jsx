@@ -30,24 +30,20 @@ function App() {
       navigate("/login");
     }
   }
-  
+
   useEffect(() => {
     checkUser();
-  }, [navigate]);
+  }, []);
 
-
-
-  
   return (
     <AppState.Provider value={{ user, setUser }}>
-       <Header/>
+      <Header />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/about" element={<About/>} />
       </Routes>
-      <Footer/>
-
+      <Footer />
     </AppState.Provider>
   );
 }
