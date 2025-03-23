@@ -1,15 +1,39 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./AnswerPage.css";
 import { IoPersonCircleOutline } from "react-icons/io5";
+import { useParams } from "react-router-dom";
+import axios from "../../utils/axiosConfig";
 
-const AnswerPage = () => {
+const AnswerPage = (props) => {
+  const { title, askedby, qdesc, questionid } = props;
+  const { question_id } = useParams();
+  console.log(question_id);
+  const token = localStorage.getItem("token");
+  const [answerdata, setAnswerdata] = useState([]);
+
   const [answer, setAnswer] = useState("");
-
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Answer Submitted:", { answer });
     setAnswer("");
   };
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const { data } = await axios.get(`/answer/get-answer/${question_id}`, {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        });
+        console.log("Data fetched:", data);
+        setAnswerdata(data.answers); // Set the fetched data correctly
+      } catch (error) {
+        console.error("Error fetching questions:", error);
+      }
+    }
+    fetchData();
+  }, [question_id, token]);
   return (
     <div className="container">
       <div className="question-section">
@@ -25,11 +49,14 @@ const AnswerPage = () => {
         <hr />
         <div className="answer-box">
           <IoPersonCircleOutline size={80} />
-
-          <div className="answer-text">
-            <p>it uses for routing purpose</p>
-            <span className="username">misrak_Z</span>
-          </div>
+          {answerdata?.map((answer) => (
+            <>
+              <div className="answer-text">
+                <p>{answer?.content}</p>
+                <span className="username">{answer?.user_name}</span>
+              </div>
+            </>
+          ))}
         </div>
       </div>
 
