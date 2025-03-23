@@ -43,7 +43,10 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/answer" element={<AnswerPage />} />
+        <Route
+          path="/answer/get-answer/:question_id"
+          element={<AnswerPage />}
+        />
         <Route path="/ask-question" element={<AskQuestion />} />
       </Routes>
       <About/>
