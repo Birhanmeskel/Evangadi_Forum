@@ -2,7 +2,8 @@ import React, { useRef, useState } from "react";
 import axios from "../../utils/axiosConfig";
 import { useNavigate } from "react-router-dom";
 import classes from "./Login.module.css";
-function Login() {
+
+function Login({ onToggle }) {
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [loginError, setLoginError] = useState("");
@@ -16,6 +17,7 @@ function Login() {
     setEmailError("");
     setPasswordError("");
     setLoginError("");
+
     const emailValue = emailDom.current.value;
     const passValue = passwordDom.current.value;
 
@@ -35,26 +37,27 @@ function Login() {
         email: emailValue,
         password: passValue,
       });
-      // alert("login successful!");
-      // console.log(data);
 
       localStorage.setItem("token", data.token);
-
       navigate("/");
     } catch (error) {
-      // alert(error.response.data.msg);
       setLoginError(error?.response?.data?.msg || "Login failed");
-      console.log(error.response.data);
+      console.error("Login error:", error); // Log the error for debugging
     }
   }
+
   return (
     <section className={classes.container}>
       <h2 className={classes.title}>Login to your account</h2>
       <p className={classes.text}>
         Don't have an account?{" "}
-        <a href="#" className={classes.link}>
+        <span
+          onClick={onToggle}
+          className={classes.link}
+          style={{ cursor: "pointer" }}
+        >
           Create a new account
-        </a>
+        </span>
       </p>
       <div>
         <form onSubmit={handleSubmit}>
@@ -62,7 +65,7 @@ function Login() {
             <input
               ref={emailDom}
               type="email"
-              placeholder="Email adress"
+              placeholder="Email address"
               style={{
                 border: emailError ? "1px solid #f04438" : "1px solid #ccc",
               }}

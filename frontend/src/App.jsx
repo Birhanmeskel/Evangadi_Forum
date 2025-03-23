@@ -10,6 +10,7 @@ import Header from "./components/Header/Header.jsx";
 import Register from "./pages/Register/Register.jsx";
 import AnswerPage from "./pages/Answer/AnswerPage.jsx";
 import AskQuestion from "./pages/Question/AskQuestion.jsx";
+import Landing from "./components/Landing/Landing.jsx";
 export const AppState = createContext();
 function App() {
   const [user, setUser] = useState(null); // Initialize user to null
@@ -53,15 +54,14 @@ function App() {
       <Header logout={logout} />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Landing />} />
+        <Route path="/register" element={<Landing />} />
         <Route
           path="/answer/get-answer/:question_id"
           element={<AnswerPage />}
         />
         <Route path="/ask-question" element={<AskQuestion />} />
       </Routes>
-      <About />
       <Footer />
     </AppState.Provider>
   );
