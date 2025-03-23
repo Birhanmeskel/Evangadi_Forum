@@ -4,17 +4,19 @@ import QuestionCard from "./QuestionCard";
 import axios from "../../utils/axiosConfig";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
+import AnswerPage from "../Answer/AnswerPage";
 function Home() {
   const token = localStorage.getItem("token");
   const { user, setUser } = useContext(AppState);
-  const [qdata, setqdata] = useState([]); 
+  const [qdata, setqdata] = useState([]);
+  const ishome = true;
 
   useEffect(() => {
     async function fetchData() {
       try {
         const { data } = await axios.get("/question/all-questions", {
           headers: {
-            Authorization: "Bearer " + token, 
+            Authorization: "Bearer " + token,
           },
         });
         console.log("Data fetched:", data);
@@ -29,24 +31,33 @@ function Home() {
   return (
     <>
       <section className="container">
-        <div className="d-flex justify-content-between m-5">
-          <div>
-            <Link to={"/ask-question"} className="btn btn-primary">
-              Ask question
-            </Link>
-          </div>
-          <div>Welcome: {user?.username}</div>
-        </div>
-        <h3>Questions</h3>
+        {ishome && (
+          <>
+            <div className="d-flex justify-content-between m-5">
+              <div>
+                <Link to={`/ask-question/`} className="btn btn-primary">
+                  Ask question
+                </Link>
+              </div>
+              <div>Welcome: {user?.username}</div>
+            </div>
+            <h3>Questions</h3>
+          </>
+        )}
+
         <hr />
         <div>
           {qdata.map((question) => (
-            <QuestionCard
-              key={question?.id}
-              title={question?.title}
-              askedby={question.username}
-              qdesc={question.description}
-            />
+            <>
+              <QuestionCard
+                key={question?.id}
+                title={question?.title}
+                askedby={question.username}
+                qdesc={question.description}
+                questionid={question.questionid}
+              />{" "}
+              
+            </>
           ))}
         </div>
       </section>

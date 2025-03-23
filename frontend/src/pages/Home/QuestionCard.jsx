@@ -4,7 +4,8 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { Link } from "react-router-dom";
 
 function QuestionCard(props) {
-  const { title, askedby, qdesc } = props;
+  const { title, askedby, qdesc, questionid } = props;
+  const question_id = 1;
 
   const [isHovered, setIsHovered] = useState(false);
 
@@ -27,7 +28,7 @@ function QuestionCard(props) {
             <p>{askedby}</p>
           </div>
           <Link
-            to={"/answer"}
+            to={`/answer/get-answer/${questionid}`}
             style={{ textDecoration: "none", color: "black" }}
           >
             <div className=" p-4">
@@ -36,7 +37,10 @@ function QuestionCard(props) {
             </div>
           </Link>
         </div>
-        <Link to={"/answer"} style={{ textDecoration: "none", color: "black" }}>
+        <Link
+          to={`/answer/${questionid}`}
+          style={{ textDecoration: "none", color: "black" }}
+        >
           <div className="pt-5">
             <ArrowForwardIosIcon />
           </div>

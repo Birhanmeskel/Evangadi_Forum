@@ -6,12 +6,9 @@ const jwt = require("jsonwebtoken");
 
 // get All Answer
 async function get_answer(req, res) {
-  //   const { question_id } = req.params;
-  const { questionid } = req.body;
-
-  const question_id = questionid;
+  const question_id = req.params.question_id;
   console.log(question_id);
-  if (!question_id || isNaN(question_id)) {
+  if (!question_id) {
     return res
       .status(StatusCodes.BAD_REQUEST)
       .json({ error: "Bad Request", message: "Invalid question ID" });
@@ -19,19 +16,19 @@ async function get_answer(req, res) {
   try {
     // Check if the Question Exists
     const [questions] = await dbConnection.query(
-      "SELECT questionid FROM questions WHERE id = ?",
+      "SELECT questionid FROM questions WHERE questionid = ?",
       [question_id]
     );
     console.log(questions);
-    const { questionid } = questions[0];
-    console.log(questionid);
+    // const { questionid } = questions[0];
+    // console.log(questionid);
     if (questions.length === 0) {
       return res.status(StatusCodes.NOT_FOUND).json({
         error: "Not Found",
         message: "The requested question could not be found.",
       });
     }
- 
+
     // Fetch Answers
     const [answers] = await dbConnection.query(
       `
@@ -40,7 +37,7 @@ FROM answers a
 JOIN usertable u ON a.userid = u.userid
 WHERE a.questionid = ?;
     `,
-      [questionid]
+      [question_id]
     );
     console.log(answers);
     res.status(StatusCodes.OK).json({
