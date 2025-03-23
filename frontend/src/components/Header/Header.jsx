@@ -34,10 +34,6 @@ function Header({ logout = () => {} }) {
         <Link to="/" className="logo">
           <img src={evangadiLogo} alt="evangadiLogo" />
         </Link>
-        <input type="checkbox" id="menu-toggle" className="menu-toggle" />
-        <label htmlFor="menu-toggle" className="menu-icon">
-          ☰
-        </label>
         <nav className="nav-links">
           <Link to="/" className="links">
             Home
@@ -53,5 +49,4 @@ function Header({ logout = () => {} }) {
     </header>
   );
 }
-
 export default Header;
