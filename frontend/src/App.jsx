@@ -12,22 +12,28 @@ import AnswerPage from "./pages/Answer/AnswerPage.jsx";
 import AskQuestion from "./pages/Question/AskQuestion.jsx";
 export const AppState = createContext();
 function App() {
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState(null); // Initialize user to null
   const navigate = useNavigate();
 
   const token = localStorage.getItem("token");
 
   async function checkUser() {
     try {
-      const { data } = await axios.get("/users/check", {
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      });
-
-      setUser(data);
+      if (token) {
+        // Only check if token exists.
+        const { data } = await axios.get("/users/check", {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        });
+        setUser(data);
+      } else {
+        setUser(null); // if there is no token, set user to null.
+        navigate("/login");
+      }
     } catch (error) {
       console.log(error.response);
+      setUser(null);
       navigate("/login");
     }
   }
@@ -36,9 +42,15 @@ function App() {
     checkUser();
   }, []);
 
+  const logout = () => {
+    setUser(null); // Clear user state
+    localStorage.removeItem("token"); // Clear token from local storage
+    navigate("/login"); // Redirect to login page
+  };
+
   return (
     <AppState.Provider value={{ user, setUser }}>
-      <Header />
+      <Header logout={logout} />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
@@ -49,7 +61,7 @@ function App() {
         />
         <Route path="/ask-question" element={<AskQuestion />} />
       </Routes>
-      <About/>
+      <About />
       <Footer />
     </AppState.Provider>
   );
