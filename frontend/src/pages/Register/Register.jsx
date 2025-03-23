@@ -1,122 +1,141 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import axios from "../../utils/axiosConfig";
-import { useNavigate } from "react-router-dom";
 import classes from "./Register.module.css";
-import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import VisibilityIcon from "@mui/icons-material/Visibility";
 
-function Register() {
-    const navigate = useNavigate ();
-    const userNameDom = useRef();
-    const firstNameDom = useRef();
-    const lastNameDom = useRef();
-    const emailDom = useRef();
-    const passwordDom = useRef();
+function Register({ onToggle }) {
+  const [showPassword, setShowPassword] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
-    async function handleSubmit (e) {
-        e.preventDefault();
-        const usernameValue = userNameDom.current.value;
-        const firstnameValue = firstNameDom.current.value;
-        const lastnameValue = lastNameDom.current.value;
-        const emailValue = emailDom.current.value;
-        const passwordValue = passwordDom.current.value;
-        if (
-            !usernameValue ||
-            !firstnameValue ||
-            !lastnameValue ||
-            !emailValue ||
-            !passwordValue
-        ) {
-            alert('Please provide all required information');
-            return;
-        }
+  const userNameDom = useRef();
+  const firstNameDom = useRef();
+  const lastNameDom = useRef();
+  const emailDom = useRef();
+  const passwordDom = useRef();
 
-     try {
-        await axios.post('/users/register', {
-            username: usernameValue,
-            firstname: firstnameValue,
-            lastname: lastnameValue,
-            email: emailValue,
-            password: passwordValue,
-        });
-        // alert("register successful. Please login");
-        navigate('/login');
-     } catch (error) {
-        // alert('something went wrong!')
-        console.log(error.response);
-     }
+  async function handleSubmit(e) {
+    e.preventDefault();
+    setErrorMessage("");
+
+    const usernameValue = userNameDom.current.value.trim();
+    const firstnameValue = firstNameDom.current.value.trim();
+    const lastnameValue = lastNameDom.current.value.trim();
+    const emailValue = emailDom.current.value.trim();
+    const passwordValue = passwordDom.current.value;
+
+    if (
+      !usernameValue ||
+      !firstnameValue ||
+      !lastnameValue ||
+      !emailValue ||
+      !passwordValue
+    ) {
+      setErrorMessage("Please provide all required information");
+      return;
     }
+
+    try {
+      await axios.post("/users/register", {
+        username: usernameValue,
+        firstname: firstnameValue,
+        lastname: lastnameValue,
+        email: emailValue,
+        password: passwordValue,
+      });
+
+      onToggle(); // Switch to login form instead of navigating away
+    } catch (error) {
+      setErrorMessage(error?.response?.data?.msg || "Something went wrong!");
+      console.error(error.response);
+    }
+  }
+
   return (
     <section className={classes.container}>
-         <h2 className={classes.title}>Join the network</h2>
-              <p className={classes.text}>
-                Already have an account?{" "}
-                <a href="#" className={classes.link}>
-                  Sign in
-                </a>
-              </p>
-        <form onSubmit={handleSubmit}>
+      <h2 className={classes.title}>Join the network</h2>
+      <p className={classes.text}>
+        Already have an account?{" "}
+        <span
+          onClick={onToggle}
+          className={classes.link}
+          style={{ cursor: "pointer" }}
+        >
+          Sign in
+        </span>
+      </p>
+
+      <form onSubmit={handleSubmit}>
         <div className={classes.input_group}>
-                <input 
-                ref={emailDom}
-                type="text" 
-                placeholder="Email" />
-            </div>
-        
-            <div className={classes.input_name_container}>
-            <div className={classes.input_group}>
-                <input 
-                ref={firstNameDom}
-                type="text" 
-                placeholder="First Name" />
-            </div>
-           
-            <div className={classes.input_group}>
-                 <input 
-                 ref={lastNameDom}
-                 type="text" 
-                 placeholder="Last Name"/>
-            </div>
-            </div>
-        
-            <div className={classes.input_group}>
-                <input 
-                ref={userNameDom}
-                type="text" 
-                placeholder="User Name" 
-                />
-                </div>
+          <input ref={emailDom} type="email" placeholder="Email" required />
+        </div>
 
-            
-            <div className={classes.input_group}>
-               
-                <input 
-                    ref={passwordDom}
-                    type="text" 
-                    placeholder="Password" />
-                     <span> <VisibilityOffIcon /></span>
-            </div>
-            <button type="submit" className={classes.btn}>Agree and Join</button>
-            <br />
-            <br />
+        <div className={classes.input_name_container}>
+          <div className={classes.input_group}>
+            <input
+              ref={firstNameDom}
+              type="text"
+              placeholder="First Name"
+              required
+            />
+          </div>
 
-              <p className={classes.form_footer}>
-                <p>I agree to the <a href="#" className={classes.link}>
-                        privacy policy
-                        </a> and <a href="#" className={classes.link}>
-                        terms of service
-                        </a>.</p>
-                        <br />
+          <div className={classes.input_group}>
+            <input
+              ref={lastNameDom}
+              type="text"
+              placeholder="Last Name"
+              required
+            />
+          </div>
+        </div>
 
-                <p>
-                        <a href="#" className={classes.link}>
-                                Already have an account?
-                                    </a>
-                                </p>
-                    </p>
-        </form>
-    
+        <div className={classes.input_group}>
+          <input
+            ref={userNameDom}
+            type="text"
+            placeholder="User Name"
+            required
+          />
+        </div>
+
+        <div className={classes.input_group} style={{ position: "relative" }}>
+          <input
+            ref={passwordDom}
+            type={showPassword ? "text" : "password"}
+            placeholder="Password"
+            required
+          />
+          <span
+            onClick={() => setShowPassword(!showPassword)}
+            style={{ position: "absolute", right: "10px", cursor: "pointer" }}
+          >
+            {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
+          </span>
+        </div>
+
+        {errorMessage && (
+          <p style={{ color: "red", paddingTop: "5px" }}>{errorMessage}</p>
+        )}
+
+        <button type="submit" className={classes.btn}>
+          Agree and Join
+        </button>
+
+        <p className={classes.form_footer}>
+          I agree to the{" "}
+          <a href="#" className={classes.link}>
+            privacy policy
+          </a>{" "}
+          and{" "}
+          <a href="#" className={classes.link}>
+            terms of service
+          </a>
+          .
+        </p>
+      </form>
     </section>
-  )
+  );
 }
 
-export default Register
+export default Register;
