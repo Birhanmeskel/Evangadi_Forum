@@ -9,6 +9,8 @@ function Home() {
   const token = localStorage.getItem("token");
   const { user, setUser } = useContext(AppState);
   const [qdata, setqdata] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
+
   const ishome = true;
 
   useEffect(() => {
@@ -19,7 +21,7 @@ function Home() {
             Authorization: "Bearer " + token,
           },
         });
-        console.log("Data fetched:", data);
+        // console.log("Data fetched:", data);
         const sortedData = data.sort((a, b) => b.id - a.id);
 
         setqdata(sortedData);
@@ -29,6 +31,15 @@ function Home() {
     }
     fetchData();
   }, [token]);
+
+  // Filter questions using tags
+  const filteredQuestions = qdata.filter((question) => {
+    const tagsArray =
+      typeof question.tag === "string" ? question.tag.split(",") : [];
+    return tagsArray.some((tag) =>
+      tag.toLowerCase().trim().includes(searchQuery.toLowerCase())
+    );
+  });
 
   return (
     <>
@@ -43,24 +54,49 @@ function Home() {
               </div>
               <div>Welcome: {user?.username}</div>
             </div>
-            <h3>Questions</h3>
+            {/* Search Input */}
+            <div className="mb-3">
+              <input
+                style={{ width: "93%", borderRadius: "10px" }}
+                type="text"
+                className="p-2"
+                placeholder="Search questions by tag..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+            </div>
+            {searchQuery && <h3>Search Results</h3>}
+            <hr />
+            {searchQuery &&
+              (filteredQuestions.length > 0 ? (
+                filteredQuestions.map((question) => (
+                  <QuestionCard
+                    key={question?.id}
+                    title={question?.title}
+                    askedby={question?.username}
+                    qdesc={question?.description}
+                    questionid={question?.questionid}
+                  />
+                ))
+              ) : (
+                <p>No matching questions found.</p>
+              ))}
+
+            <h3>All Questions</h3>
+            <hr />
+            <div>
+              {qdata.map((question) => (
+                <QuestionCard
+                  key={question?.id}
+                  title={question?.title}
+                  askedby={question?.username}
+                  qdesc={question?.description}
+                  questionid={question?.questionid}
+                />
+              ))}
+            </div>
           </>
         )}
-
-        <hr />
-        <div>
-          {qdata.map((question) => (
-            <>
-              <QuestionCard
-                key={question?.id}
-                title={question?.title}
-                askedby={question?.username}
-                qdesc={question?.description}
-                questionid={question?.questionid}
-              />{" "}
-            </>
-          ))}
-        </div>
       </section>
     </>
   );
