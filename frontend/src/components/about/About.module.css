@@ -63,3 +63,11 @@ button {
 button:hover {
   background-color: #dea76c;
 }
+
+
+
+@media (max-width: 768px) {
+  .secondP{
+    display: none;
+  }
+}

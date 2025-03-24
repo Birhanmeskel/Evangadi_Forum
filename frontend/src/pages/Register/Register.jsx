@@ -65,7 +65,7 @@ function Register({ onToggle }) {
         </span>
       </p>
 
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className={classes.form_container}>
         <div className={classes.input_group}>
           <input ref={emailDom} type="email" placeholder="Email" required />
         </div>
@@ -132,6 +132,15 @@ function Register({ onToggle }) {
             terms of service
           </a>
           .
+        </p>
+        <p>
+          <span
+            onClick={onToggle}
+            className={classes.link}
+            style={{ cursor: "pointer" }}
+          >
+            Already have an account?
+          </span>
         </p>
       </form>
     </section>

@@ -2,15 +2,13 @@ import { useEffect, useState, createContext } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import axios from "./utils/axiosConfig";
 import "./App.css";
-import Login from "./pages/Login/Login";
 import Home from "./pages/Home/Home";
 import Footer from "./components/Footer/Footer.jsx";
-import About from "./components/about/About.jsx";
 import Header from "./components/Header/Header.jsx";
-import Register from "./pages/Register/Register.jsx";
 import AnswerPage from "./pages/Answer/AnswerPage.jsx";
 import AskQuestion from "./pages/Question/AskQuestion.jsx";
 import Landing from "./components/Landing/Landing.jsx";
+import Four04 from "./pages/Four04/Four04.jsx";
 export const AppState = createContext();
 function App() {
   const [user, setUser] = useState(null); // Initialize user to null
@@ -61,6 +59,7 @@ function App() {
           element={<AnswerPage />}
         />
         <Route path="/ask-question" element={<AskQuestion />} />
+        <Route path="*" element={<Four04 />} />
       </Routes>
       <Footer />
     </AppState.Provider>
