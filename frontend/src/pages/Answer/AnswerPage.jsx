@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import "./AnswerPage.css";
+import classes from "./AnswerPage.module.css";
 import { IoPersonCircleOutline } from "react-icons/io5";
+import { MdArrowCircleRight } from "react-icons/md";
 import { Link, useLocation, useParams } from "react-router-dom";
 import axios from "../../utils/axiosConfig";
 
@@ -66,35 +67,41 @@ const AnswerPage = () => {
     fetchData();
   });
   return (
-    <div className="container">
-      <div className="question-section">
-        <h2 className="question-title">{title}</h2>
-        <p className="question-text">{qdesc}</p>
-        <a href="#" className="question-link">
-          how does it work
-        </a>
+    <div className={classes.container}>
+      {/* question section */}
+      <div className={classes.question_section}>
+        <div style={{ display: "flex", gap: "5px" }}>
+          <MdArrowCircleRight size={30} />
+          <h2 className={classes.question_title}>hello{title}</h2>
+        </div>
+        <p className={classes.question_text}>{qdesc}</p>
       </div>
+      <hr />
 
-      <div className="answer-section">
-        <h3 className="answer-title">Answer From The Community</h3>
+      {/* answer section */}
+      <div className={classes.answer_section}>
+        <h3 className={classes.answer_title}>Answer From The Community</h3>
         <hr />
         {answerdata?.map((answer) => (
-          <div className="answer-box d-flex">
-            <div className="answer-icon col-2">
-              <IoPersonCircleOutline size={70} />
-              <p className="username">{answer?.user_name}</p>
+          <div>
+            <div className={classes.answer_box}>
+              <div className={classes.answer_icon}>
+                <IoPersonCircleOutline size={70} />
+                <p className={classes.username}>{answer?.user_name}</p>
+              </div>
+              <div className={classes.answer_text}>
+                <p>{answer?.content}</p>
+              </div>
             </div>
-            <div className="answer-text col-10">
-              <p>{answer?.content}</p>
-            </div>
+            <hr />
           </div>
         ))}
       </div>
 
       {/* Answer Input Section */}
-      <div className="ans-form-container">
+      <div className={classes.ans_form_container}>
         <h3>Answer The Top Question</h3>
-        <Link to={"/"} className="go-to-questions">
+        <Link to={`/ask-question/`} className={classes.go_to_questions}>
           Go to Question page
         </Link>
         <form onSubmit={handleSubmit}>
@@ -102,10 +109,10 @@ const AnswerPage = () => {
             placeholder="Your Answer..."
             value={answer}
             onChange={(e) => setAnswer(e.target.value)}
-            className="ans-textarea"
+            className={classes.ans_textarea}
             required
           ></textarea>
-          <button type="submit" className="ans-submit-btn">
+          <button type="submit" className={classes.ans_submit_btn}>
             Post Your Answer
           </button>
         </form>

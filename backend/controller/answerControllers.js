@@ -34,7 +34,7 @@ async function get_answer(req, res) {
       `
       SELECT a.answerid AS answer_id, a.answer AS content, a.userid, u.username AS user_name
 FROM answers a
-JOIN usertable u ON a.userid = u.userid
+JOIN userTable u ON a.userid = u.userid
 WHERE a.questionid = ?;
     `,
       [question_id]
@@ -105,7 +105,6 @@ async function post_answer(req, res) {
     }
   }
 }
-
 
 module.exports = {
   get_answer,
