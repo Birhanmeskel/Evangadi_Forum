@@ -56,7 +56,6 @@ function Home() {
                 qdesc={question.description}
                 questionid={question.questionid}
               />{" "}
-              
             </>
           ))}
         </div>
