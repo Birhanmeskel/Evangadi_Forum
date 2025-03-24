@@ -13,8 +13,6 @@ const AnswerPage = () => {
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
 
-  console.log(title);
-  console.log(question_id);
   const token = localStorage.getItem("token");
   const [answerdata, setAnswerdata] = useState([]);
   const [answer, setAnswer] = useState("");
@@ -59,7 +57,7 @@ const AnswerPage = () => {
             Authorization: "Bearer " + token,
           },
         });
-        console.log("Data fetched:", data);
+        // console.log("Data fetched:", data);
         setAnswerdata(data.answers); // Set the fetched data correctly
       } catch (error) {
         console.error("Error fetching questions:", error);
@@ -88,7 +86,6 @@ const AnswerPage = () => {
             </div>
             <div className="answer-text col-10">
               <p>{answer?.content}</p>
-              <hr />
             </div>
           </div>
         ))}
