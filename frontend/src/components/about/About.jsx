@@ -16,7 +16,7 @@ const About = () => {
           500company you have much to offer to those who are trying to follow in
           your footsteps.
         </p>
-        <p>
+        <p className={classes.secondP}>
           Wheather you are willing to share your knowledge or your are just
           looking to meet mentors of your own, please start by joining the
           network here.
