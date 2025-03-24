@@ -21,7 +21,7 @@ const AskQuestion = () => {
         {
           title,
           description,
-          tag, // Include tag in the request
+          tag, // Include tag in the request       
         },
         {
           headers: {
