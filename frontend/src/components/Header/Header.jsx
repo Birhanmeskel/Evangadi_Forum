@@ -31,11 +31,11 @@ function Header({ logout = () => {} }) {
   return (
     <header className={`header ${sticky ? "sticky" : ""}`}>
       <div className="nav-container">
-        <Link to="/" className="logo">
+        <Link to={token ? "/" : "/login"} className="logo">
           <img src={evangadiLogo} alt="evangadiLogo" />
         </Link>
         <nav className="nav-links">
-          <Link to="/" className="links">
+          <Link className="links" to={token ? "/" : "/login"}>
             Home
           </Link>
           <Link to="/how-it-works" className="links">

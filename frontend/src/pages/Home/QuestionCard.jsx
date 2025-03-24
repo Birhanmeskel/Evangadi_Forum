@@ -10,6 +10,7 @@ function QuestionCard(props) {
   const divStyle = {
     backgroundColor: isHovered ? "lightblue" : "white",
     padding: "10px",
+    cursor: "pointer",
     transition: "background-color 0.3s ease", // Smooth transition
   };
   return (
