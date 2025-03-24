@@ -20,7 +20,9 @@ function Home() {
           },
         });
         console.log("Data fetched:", data);
-        setqdata(data); // Set the fetched data correctly
+        const sortedData = data.sort((a, b) => b.id - a.id);
+
+        setqdata(sortedData);
       } catch (error) {
         console.error("Error fetching questions:", error);
       }
