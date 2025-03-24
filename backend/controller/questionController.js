@@ -16,12 +16,12 @@ JOIN userTable u ON q.userid = u.userid
 WHERE q.userid = u.userid`
     );
     // Respond with a JSON payload containing all questions and metadata
-    if (allQuestions.length < 1) {
-      res.status(StatusCodes.NOT_FOUND).json({
-        error: "Not Found",
-        message: "No questions found.",
-      });
-    }
+    // if (allQuestions.length < 1) {
+    //   res.status(StatusCodes.NOT_FOUND).json({
+    //     error: "Not Found",
+    //     message: "No questions found.",
+    //   });
+    // }
     res.status(StatusCodes.OK).json(allQuestions);
   } catch (error) {
     console.error("Error fetching questions:", error);
