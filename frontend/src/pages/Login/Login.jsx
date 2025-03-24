@@ -3,10 +3,12 @@ import axios from "../../utils/axiosConfig";
 import { useNavigate } from "react-router-dom";
 import classes from "./Login.module.css";
 
+
 function Login({ onToggle }) {
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [loginError, setLoginError] = useState("");
+
 
   const navigate = useNavigate();
   const emailDom = useRef();
@@ -59,7 +61,7 @@ function Login({ onToggle }) {
           Create a new account
         </span>
       </p>
-      <div>
+      <div className={classes.form_container}>
         <form onSubmit={handleSubmit}>
           <div className={classes.input_group}>
             <input
@@ -86,21 +88,26 @@ function Login({ onToggle }) {
                 border: passwordError ? "1px solid #f04438" : "1px solid #ccc",
               }}
             />
+          
             {passwordError && (
               <small style={{ paddingTop: "5px", color: "red" }}>
                 {passwordError}
               </small>
             )}
           </div>
-          <p className={classes.form_footer}>
-            <a href="#" className={classes.link}>
-              Forgot password?
-            </a>
-          </p>
-      
+
           <button type="submit" className={classes.btn}>
             Login
           </button>
+          <p className={classes.form_footer}>
+            <span
+              onClick={onToggle}
+              className={classes.link}
+              style={{ cursor: "pointer" }}
+            >
+              Create a new account
+            </span>
+          </p>
         </form>
         {loginError && (
           <small style={{ paddingTop: "5px", color: "red" }}>

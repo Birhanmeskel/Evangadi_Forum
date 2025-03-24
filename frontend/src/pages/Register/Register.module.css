@@ -32,7 +32,10 @@
 .link:hover {
   text-decoration: underline;
 }
-
+.form_container {
+  width: 80%;
+  margin: 0 auto;
+}
 /* Input Group */
 .input_group {
   display: flex;

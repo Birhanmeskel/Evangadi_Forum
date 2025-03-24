@@ -34,6 +34,10 @@
 .link:hover {
   text-decoration: underline;
 }
+.form_container{
+  width: 80%;
+  margin: 0 auto;
+}
 
 /* Input Group */
 .input_group {
@@ -63,15 +67,20 @@
 
 /* Button */
 .btn {
-  display: inline-block;
-  width: 70%;
+  width: 50%;
+  margin: 0 auto;
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
   background: #2600ff;
   color: white;
   border: none;
   border-radius: 5px;
   font-size: 16px;
   cursor: pointer;
-  text-align: center;
+  margin-top: 25px;
+  /* text-align: center; */
 
   margin-bottom: 5px;
 }
@@ -82,7 +91,8 @@
 .form_footer {
   margin-top: 10px;
   font-size: 14px;
+  display: block;
 }
 form p {
-  float: right;
+  /* float: right; */
 }
