@@ -21,7 +21,7 @@ const AnswerPage = () => {
     e.preventDefault();
     setError(null); // Reset error on new submit
     setSuccess(null); // Reset success on new submit
-    console.log("Answer Submitted:", { answer });
+    // console.log("Answer Submitted:", { answer });
 
     // Send the answer to the backend
     try {
@@ -37,7 +37,7 @@ const AnswerPage = () => {
           },
         }
       );
-      console.log("Answer Submitted:", response.data);
+      // console.log("Answer Submitted:", response.data);
       setAnswer("");
       setSuccess(response.data.msg);
     } catch (err) {
