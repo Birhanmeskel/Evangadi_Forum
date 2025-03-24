@@ -1,21 +1,54 @@
 import React, { useEffect, useState } from "react";
 import "./AnswerPage.css";
 import { IoPersonCircleOutline } from "react-icons/io5";
-import { useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import axios from "../../utils/axiosConfig";
 
-const AnswerPage = (props) => {
-  const { title, askedby, qdesc, questionid } = props;
+const AnswerPage = () => {
+  const location = useLocation();
+  const { title, qdesc } = location?.state || {};
   const { question_id } = useParams();
+  const questionid = question_id;
+
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(null);
+
+  console.log(title);
   console.log(question_id);
   const token = localStorage.getItem("token");
   const [answerdata, setAnswerdata] = useState([]);
-
   const [answer, setAnswer] = useState("");
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setError(null); // Reset error on new submit
+    setSuccess(null); // Reset success on new submit
     console.log("Answer Submitted:", { answer });
-    setAnswer("");
+
+    // Send the answer to the backend
+    try {
+      const response = await axios.post(
+        "/answer",
+        {
+          answer,
+          questionid,
+        },
+        {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        }
+      );
+      console.log("Answer Submitted:", response.data);
+      setAnswer("");
+      setSuccess(response.data.msg);
+    } catch (err) {
+      console.error("Error submitting Answer:", err);
+      if (err.response && err.response.data && err.response.data.msg) {
+        setError(err.response.data.msg);
+      } else {
+        setError("An unexpected error occurred.");
+      }
+    }
   };
 
   useEffect(() => {
@@ -33,12 +66,12 @@ const AnswerPage = (props) => {
       }
     }
     fetchData();
-  }, [question_id, token]);
+  });
   return (
     <div className="container">
       <div className="question-section">
-        <h2 className="question-title">Question</h2>
-        <p className="question-text">what's react-router-dom?</p>
+        <h2 className="question-title">{title}</h2>
+        <p className="question-text">{qdesc}</p>
         <a href="#" className="question-link">
           how does it work
         </a>
@@ -47,23 +80,26 @@ const AnswerPage = (props) => {
       <div className="answer-section">
         <h3 className="answer-title">Answer From The Community</h3>
         <hr />
-        <div className="answer-box">
-          <IoPersonCircleOutline size={80} />
-          {answerdata?.map((answer) => (
-            <>
-              <div className="answer-text">
-                <p>{answer?.content}</p>
-                <span className="username">{answer?.user_name}</span>
-              </div>
-            </>
-          ))}
-        </div>
+        {answerdata?.map((answer) => (
+          <div className="answer-box d-flex">
+            <div className="answer-icon col-2">
+              <IoPersonCircleOutline size={70} />
+              <p className="username">{answer?.user_name}</p>
+            </div>
+            <div className="answer-text col-10">
+              <p>{answer?.content}</p>
+              <hr />
+            </div>
+          </div>
+        ))}
       </div>
 
       {/* Answer Input Section */}
       <div className="ans-form-container">
         <h3>Answer The Top Question</h3>
-        <p className="go-to-questions">Go to Question page</p>
+        <Link to={"/"} className="go-to-questions">
+          Go to Question page
+        </Link>
         <form onSubmit={handleSubmit}>
           <textarea
             placeholder="Your Answer..."

@@ -32,14 +32,14 @@ const AskQuestion = () => {
       console.log("Question Submitted:", response.data);
       setTitle("");
       setDescription("");
-      setTag(""); // Clear tag field
-      setSuccess(response.data.msg); // Assuming your backend sends a "msg" on success.
+      setTag(""); 
+      setSuccess(response.data.msg); 
     } catch (err) {
       console.error("Error submitting question:", err);
       if (err.response && err.response.data && err.response.data.msg) {
-        setError(err.response.data.msg); // Set error message from backend
+        setError(err.response.data.msg); 
       } else {
-        setError("An unexpected error occurred."); // Generic error message
+        setError("An unexpected error occurred."); 
       }
     }
   };

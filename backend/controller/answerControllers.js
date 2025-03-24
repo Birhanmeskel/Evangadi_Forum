@@ -90,10 +90,12 @@ async function post_answer(req, res) {
     connection.release();
 
     console.log("Answer inserted successfully:", insertResult);
-    res.status(201).json({ message: "Answer posted successfully" });
+
+    return res.status(201).json({ message: "Answer posted successfully" });
   } catch (error) {
     console.error("Error posting answer:", error);
-    res.status(500).json({
+
+    return res.status(500).json({
       error: "Internal Server Error",
       message: "An unexpected error occurred.",
     });
@@ -102,9 +104,8 @@ async function post_answer(req, res) {
       connection.release();
     }
   }
-
-  res.send("posted");
 }
+
 
 module.exports = {
   get_answer,

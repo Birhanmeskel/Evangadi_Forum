@@ -5,8 +5,6 @@ import { Link } from "react-router-dom";
 
 function QuestionCard(props) {
   const { title, askedby, qdesc, questionid } = props;
-  const question_id = 1;
-
   const [isHovered, setIsHovered] = useState(false);
 
   const divStyle = {
@@ -29,11 +27,12 @@ function QuestionCard(props) {
           </div>
           <Link
             to={`/answer/get-answer/${questionid}`}
+            state={{ title, askedby, qdesc }}
             style={{ textDecoration: "none", color: "black" }}
           >
             <div className=" p-4">
               <p>{title}</p>
-              <p>{qdesc}</p>
+              {/* <p>{qdesc}</p> */}
             </div>
           </Link>
         </div>
