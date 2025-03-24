@@ -2,46 +2,52 @@
   max-width: 65%;
   margin: 40px auto;
   font-family: Arial, sans-serif;
+  
 }
 
-.question-section {
-  padding: 15px;
-  border-bottom: 2px solid #ddd;
+.question_section {
+  /* padding: 15px; */
+  /* border-bottom: 2px solid #ddd; */
 }
 
-.question-title {
+.question_title {
+  text-align: center;
   font-size: 20px;
   font-weight: bold;
 }
 
-.question-text {
+.answer_icon {
+  display: flex;
+  flex-direction: column;
+}
+.question_text {
   font-size: 16px;
   color: #333;
 }
 
-.question-link {
+.question_link {
   color: #242121;
   text-decoration: none;
   font-size: 14px;
 }
 
-.answer-section {
+.answer_section {
   padding: 15px;
 }
 
-.answer-title {
+.answer_title {
   font-size: 18px;
   font-weight: bold;
 }
 
-.answer-box {
+.answer_box {
   display: flex;
   align-items: center;
   margin-top: 10px;
   gap: 10px;
 }
 
-.answer-text p {
+.answer_text p {
   font-size: 16px;
   color: #333;
   margin: 0;
@@ -54,7 +60,7 @@
 }
 
 /* answer input section */
-.ans-form-container {
+.ans_form_container {
   text-align: center;
   padding: 20px;
   /* max-width: 800px;
@@ -63,21 +69,22 @@
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-.ans-form-container h3 {
+.ans_form_container h3 {
   margin-bottom: 5px;
 }
 
-.go-to-questions {
+.go_to_questions {
   font-size: 14px;
   cursor: pointer;
   margin-bottom: 20px;
   text-decoration: none;
-  color: #007bff;
+  color: #000;
+  opacity: 0.5;
 }
 
 /* Input Fields */
 
-.ans-textarea {
+.ans_textarea {
   width: 100%;
   padding: 10px;
   margin-bottom: 15px;
@@ -88,7 +95,7 @@
 }
 
 /* Submit Button */
-.ans-submit-btn {
+.ans_submit_btn {
   padding: 10px 15px;
   background-color: #007bff;
   border: none;
@@ -100,20 +107,20 @@
   transition: 0.3s;
 }
 
-.ans-submit-btn:hover {
+.ans_submit_btn:hover {
   background-color: #0056b3;
 }
 
 @media (max-width: 600px) {
-  .ans-container {
+  .ans_container {
     width: 90%;
   }
 
-  .ans-textarea {
+  .ans_textarea {
     font-size: 14px;
   }
 
-  .ans-submit-btn {
+  .ans_submit_btn {
     font-size: 14px;
   }
 }

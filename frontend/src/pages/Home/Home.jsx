@@ -54,9 +54,9 @@ function Home() {
               <QuestionCard
                 key={question?.id}
                 title={question?.title}
-                askedby={question.username}
-                qdesc={question.description}
-                questionid={question.questionid}
+                askedby={question?.username}
+                qdesc={question?.description}
+                questionid={question?.questionid}
               />{" "}
             </>
           ))}

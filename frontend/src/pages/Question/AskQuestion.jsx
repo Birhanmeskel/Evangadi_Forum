@@ -57,8 +57,8 @@ const AskQuestion = () => {
       </div>
 
       <div className="ask-form-container">
-        <h3>Ask a public question</h3>
-        <p className="go-to-questions">Go to Question page</p>
+        <h3 style={{marginBottom:"18px"}}>Ask a public question</h3>
+        {/* <p className="go-to-questions">Go to Question page</p> */}
         <form onSubmit={handleSubmit}>
           <input
             type="text"

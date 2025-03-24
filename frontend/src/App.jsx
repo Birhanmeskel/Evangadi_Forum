@@ -41,7 +41,7 @@ function App() {
 
   useEffect(() => {
     checkUser();
-  }, []);
+  }, [navigate]);
 
   const logout = () => {
     setUser(null); // Clear user state
