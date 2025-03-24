@@ -53,7 +53,7 @@ function App() {
     <AppState.Provider value={{ user, setUser }}>
       <Header logout={logout} />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" index element={<Home />} />
         <Route path="/login" element={<Landing />} />
         <Route path="/register" element={<Landing />} />
         <Route
