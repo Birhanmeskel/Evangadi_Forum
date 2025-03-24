@@ -1,7 +1,8 @@
 /* Container */
 .container {
   width: 100%;
-  max-width: 400px;
+  /* max-width: 400px; */
+  height: 100%;
   background: white;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
@@ -62,14 +63,16 @@
 
 /* Button */
 .btn {
-  width: 100%;
+  display: inline-block;
+  width: 70%;
   background: #2600ff;
   color: white;
-  padding: 10px;
   border: none;
   border-radius: 5px;
   font-size: 16px;
   cursor: pointer;
+  text-align: center;
+
   margin-bottom: 5px;
 }
 

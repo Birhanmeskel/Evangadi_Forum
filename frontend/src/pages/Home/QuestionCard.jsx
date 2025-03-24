@@ -23,8 +23,13 @@ function QuestionCard(props) {
       >
         <div className="left d-flex">
           <div className=" p-4">
-            <AccountCircleIcon sx={{ fontSize: 40 }} />
-            <p>{askedby}</p>
+            <Link
+              to={`/answer/get-answer/${questionid}`}
+              style={{ textDecoration: "none", color: "black" }}
+            >
+              <AccountCircleIcon sx={{ fontSize: 40 }} />
+              <p>{askedby}</p>
+            </Link>
           </div>
           <Link
             to={`/answer/get-answer/${questionid}`}
@@ -37,7 +42,7 @@ function QuestionCard(props) {
           </Link>
         </div>
         <Link
-          to={`/answer/${questionid}`}
+          to={`/answer/get-answer/${questionid}`}
           style={{ textDecoration: "none", color: "black" }}
         >
           <div className="pt-5">
