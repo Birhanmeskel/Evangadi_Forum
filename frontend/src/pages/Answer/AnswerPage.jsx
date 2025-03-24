@@ -80,7 +80,12 @@ const AnswerPage = () => {
 
       {/* answer section */}
       <div className={classes.answer_section}>
-        <h3 className={classes.answer_title}>Answer From The Community</h3>
+        {answerdata?.length === 0 ? (
+          <p>No Answers Yet</p>
+        ) : (
+          <h3 className={classes.answer_title}>Answer From The Community</h3>
+        )}
+
         <hr />
         {answerdata?.map((answer) => (
           <div>
