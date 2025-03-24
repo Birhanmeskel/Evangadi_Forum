@@ -8,6 +8,7 @@ import Header from "./components/Header/Header.jsx";
 import AnswerPage from "./pages/Answer/AnswerPage.jsx";
 import AskQuestion from "./pages/Question/AskQuestion.jsx";
 import Landing from "./components/Landing/Landing.jsx";
+import Four04 from "./pages/Four04/Four04.jsx";
 export const AppState = createContext();
 function App() {
   const [user, setUser] = useState(null); // Initialize user to null
@@ -58,6 +59,7 @@ function App() {
           element={<AnswerPage />}
         />
         <Route path="/ask-question" element={<AskQuestion />} />
+        <Route path="*" element={<Four04 />} />
       </Routes>
       <Footer />
     </AppState.Provider>
