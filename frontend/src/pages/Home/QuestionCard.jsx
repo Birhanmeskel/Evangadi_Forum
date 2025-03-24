@@ -32,7 +32,6 @@ function QuestionCard(props) {
           >
             <div className=" p-4">
               <p>{title}</p>
-              {/* <p>{qdesc}</p> */}
             </div>
           </Link>
         </div>
