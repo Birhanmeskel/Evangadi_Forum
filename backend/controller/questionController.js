@@ -12,7 +12,7 @@ async function get_questions(req, res) {
     const [allQuestions] = await dbConnection.execute(
       `SELECT q.*, u.username
 FROM questions q
-JOIN usertable u ON q.userid = u.userid
+JOIN userTable u ON q.userid = u.userid
 WHERE q.userid = u.userid`
     );
     // Respond with a JSON payload containing all questions and metadata
