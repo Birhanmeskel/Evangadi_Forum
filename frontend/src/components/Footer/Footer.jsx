@@ -7,7 +7,7 @@ function Footer() {
   return (
     <footer className="main-footer">
       <div className="footer-container">
-       <div> 
+       <div className="picture"> 
         <div className="logo">
           <img src="https://cdn.brandfetch.io/idZ_nRYZnP/w/200/h/28/theme/light/logo.png?c=1dxbfHSJFAPEGdCLU4o5B" alt="" />
         </div>
