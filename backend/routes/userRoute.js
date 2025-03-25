@@ -14,9 +14,6 @@ router.post("/register", register);
 // login user
 router.post("/login", login);
 
-router.get("/new", (req, res) => {
-  res.send("news");
-});
 // Authentication Middleware
 router.get("/check", authMiddleware, checkUser);
 

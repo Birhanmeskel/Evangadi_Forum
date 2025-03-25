@@ -7,7 +7,7 @@ const jwt = require("jsonwebtoken");
 // get All Answer
 async function get_answer(req, res) {
   const question_id = req.params.question_id;
-  console.log(question_id);
+  // console.log(question_id);
   if (!question_id) {
     return res
       .status(StatusCodes.BAD_REQUEST)
@@ -19,7 +19,7 @@ async function get_answer(req, res) {
       "SELECT questionid FROM questions WHERE questionid = ?",
       [question_id]
     );
-    console.log(questions);
+    // console.log(questions);
     // const { questionid } = questions[0];
     // console.log(questionid);
     if (questions.length === 0) {
@@ -39,7 +39,7 @@ WHERE a.questionid = ?;
     `,
       [question_id]
     );
-    console.log(answers);
+    // console.log(answers);
     res.status(StatusCodes.OK).json({
       answers: answers.map((a) => ({
         answer_id: a.answer_id,
