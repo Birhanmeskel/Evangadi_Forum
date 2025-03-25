@@ -39,6 +39,7 @@ const AnswerPage = () => {
       );
       // console.log("Answer Submitted:", response.data);
       setAnswer("");
+
       setSuccess(response.data.msg);
     } catch (err) {
       console.error("Error submitting Answer:", err);
@@ -58,21 +59,24 @@ const AnswerPage = () => {
             Authorization: "Bearer " + token,
           },
         });
-        // console.log("Data fetched:", data);
-        setAnswerdata(data.answers); // Set the fetched data correctly
+        const response = data.answers;
+        const sortedData = response.sort((a, b) => b.answer_id - a.answer_id);
+        setAnswerdata(sortedData);
       } catch (error) {
+        eww;
         console.error("Error fetching questions:", error);
       }
     }
     fetchData();
   });
+
   return (
     <div className={classes.container}>
       {/* question section */}
       <div className={classes.question_section}>
         <div style={{ display: "flex", gap: "5px" }}>
           <MdArrowCircleRight size={30} />
-          <h2 className={classes.question_title}>hello{title}</h2>
+          <h2 className={classes.question_title}>{title}</h2>
         </div>
         <p className={classes.question_text}>{qdesc}</p>
       </div>
