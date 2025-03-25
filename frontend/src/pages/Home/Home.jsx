@@ -6,7 +6,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
 import ReactPaginate from "react-paginate";
 import Fuse from "fuse.js";
-
+import "./Home.css"
 function Home() {
   const token = localStorage.getItem("token");
   const { user } = useContext(AppState);
@@ -59,7 +59,7 @@ function Home() {
         <Link
           to="/ask-question/"
           style={{backgroundColor: "#516cf0"}}
-          className="btn btn-primary"
+          className="btn btn-primary butn"
         >
           Ask question
         </Link>

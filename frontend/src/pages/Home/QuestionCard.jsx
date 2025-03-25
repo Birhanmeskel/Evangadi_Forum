@@ -36,7 +36,7 @@ function QuestionCard(props) {
             state={{ title, askedby, qdesc }}
             style={{ textDecoration: "none", color: "black" }}
           >
-            <div className=" p-4">
+            <div className=" p-4 d-flex justify-content-center align-items-center mt-4">
               <p>{title}</p>
             </div>
           </Link>
