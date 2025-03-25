@@ -1,10 +1,10 @@
 body {
-  padding-top: 120px;
+  padding-top: 50px;
 }
 .header {
-  height: 120px;
-  background-color: #f8f9fa;
-  padding: 15px 20px;
+  height: 80px;
+  background-color: white;
+  padding: 10px 20px;
   position: fixed;
   width: 100%;
   top: 0;
@@ -27,7 +27,7 @@ body {
   max-width: 1200px;
 }
 .logo img {
-  /* height: 50px; */
+  height: 40px;
 }
 .nav-links {
   display: flex;
@@ -55,6 +55,7 @@ body {
   color: white;
   border-radius: 5px;
   text-align: center;
+  margin-bottom: 0px;
 }
 .nav-btn:hover {
   background-color: #fe8402;
@@ -69,7 +70,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 15px;
+    gap: 10px;
     width: 100%;
   }
   .nav-btn {
