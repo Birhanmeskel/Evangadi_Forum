@@ -27,6 +27,9 @@ function Header({ logout = () => {} }) {
       navigate("/login");
     }
   };
+  const logPage = () => {
+    navigate("/login");
+  };
 
   return (
     <header className={`header ${sticky ? "sticky" : ""}`}>

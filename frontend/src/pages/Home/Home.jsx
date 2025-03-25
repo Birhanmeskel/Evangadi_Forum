@@ -1,10 +1,11 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useMemo, useContext, useEffect, useState } from "react";
 import { AppState } from "../../App";
 import QuestionCard from "./QuestionCard";
 import axios from "../../utils/axiosConfig";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
 import ReactPaginate from "react-paginate";
+import Fuse from "fuse.js";
 
 function Home() {
   const token = localStorage.getItem("token");
@@ -31,14 +32,6 @@ function Home() {
     fetchData();
   }, [token]);
 
-  const filteredQuestions = qdata.filter((question) => {
-    const tagsArray =
-      typeof question.tag === "string" ? question.tag.split(",") : [];
-    return tagsArray.some((tag) =>
-      tag.toLowerCase().trim().includes(searchQuery.toLowerCase())
-    );
-  });
-
   const offset = currentPage * questionsPerPage;
   const paginatedQuestions = qdata.slice(offset, offset + questionsPerPage);
   const pageCount = Math.ceil(qdata.length / questionsPerPage);
@@ -47,10 +40,27 @@ function Home() {
     setCurrentPage(selected);
   };
 
+  const filteredQuestions = useMemo(() => {
+    if (!searchQuery.trim()) return qdata;
+
+    const options = {
+      keys: ["title"],
+      threshold: 0.4,
+      includeScore: false,
+    };
+
+    const fuse = new Fuse(qdata, options);
+    return fuse.search(searchQuery).map((result) => result.item);
+  }, [qdata, searchQuery]);
+
   return (
     <section className="container">
       <div className="d-flex justify-content-between m-5">
-        <Link to="/ask-question/" className="btn btn-primary">
+        <Link
+          to="/ask-question/"
+          style={{backgroundColor: "#516cf0"}}
+          className="btn btn-primary"
+        >
           Ask question
         </Link>
         <div>Welcome: {user?.username}</div>
@@ -60,7 +70,7 @@ function Home() {
           style={{ width: "93%", borderRadius: "10px" }}
           type="text"
           className="p-2"
-          placeholder="Search questions by tag..."
+          placeholder="Search"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
         />
