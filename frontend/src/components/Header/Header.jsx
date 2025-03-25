@@ -23,8 +23,9 @@ function Header({ logout = () => {} }) {
       logout();
       localStorage.removeItem("token");
       navigate("/login");
-    } else {
-      navigate("/login");
+    }
+    if (!token) {
+      navigate("/");
     }
   };
   const logPage = () => {
