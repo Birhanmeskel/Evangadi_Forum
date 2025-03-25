@@ -75,7 +75,7 @@
 }
 
 .ask-submit-btn:hover {
-  background-color: #0056b3;
+  background-color: orange;
 }
 
 @media (max-width: 600px) {
