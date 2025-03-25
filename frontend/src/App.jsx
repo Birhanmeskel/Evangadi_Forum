@@ -41,6 +41,19 @@ function App() {
     checkUser();
   }, [navigate]);
 
+  useEffect(() => {
+    // Function to clear token on tab close
+    const handleTabClose = () => {
+      localStorage.removeItem("token");
+    };
+
+    window.addEventListener("beforeunload", handleTabClose);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleTabClose);
+    };
+  }, []);
+
   const logout = () => {
     setUser(null); // Clear user state
     localStorage.removeItem("token"); // Clear token from local storage
