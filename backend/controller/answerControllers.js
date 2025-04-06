@@ -19,7 +19,6 @@ async function get_answer(req, res) {
       "SELECT questionid FROM questions WHERE questionid = ?",
       [question_id]
     );
-    // console.log(questions);
     // const { questionid } = questions[0];
     // console.log(questionid);
     if (questions.length === 0) {
@@ -37,7 +36,7 @@ FROM answers a
 JOIN userTable u ON a.userid = u.userid
 WHERE a.questionid = ?;
     `,
-      [question_id]
+      z[question_id]
     );
     // console.log(answers);
     res.status(StatusCodes.OK).json({
@@ -59,10 +58,10 @@ WHERE a.questionid = ?;
 // Post Answer
 async function post_answer(req, res) {
   const { questionid, answer } = req.body;
-  console.log(questionid);
+  // console.log(questionid);
   const userid = req.user.userid;
 
-  console.log(userid);
+  // console.log(userid);
 
   const currentUserId = userid; // Replace with actual user ID retrieval
 
