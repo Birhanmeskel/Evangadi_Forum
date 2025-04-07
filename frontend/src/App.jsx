@@ -11,7 +11,7 @@ import Landing from "./components/Landing/Landing.jsx";
 import Four04 from "./pages/Four04/Four04.jsx";
 export const AppState = createContext();
 function App() {
-  const [user, setUser] = useState(null); // Initialize user to null
+  const [user, setUser] = useState(null); 
   const navigate = useNavigate();
 
   const token = localStorage.getItem("token");
